@@ -46,6 +46,7 @@ void display(){
     glClear(GL_COLOR_BUFFER_BIT);
 
     glColor3f(1.0f, 0.0f, 0.0f);
+    glLineWidth(5.0f);
 
     // -------------Draw Point-------------------
     glBegin(GL_POINTS);
@@ -66,6 +67,11 @@ void display(){
     glVertex2i(400, 200);
     glEnd();
 
+    glPushMatrix(); // translate, rotate, scale start 
+    glTranslatef(200, 200, 0);
+    glRotatef(45, 0, 0, 1);
+    glScalef(2, 2, 1);
+
     //-------------Draw Line Loop (Draw Any closed shape)-------------------
     glBegin(GL_LINE_LOOP);
     glVertex2i(100, 100);
@@ -73,6 +79,9 @@ void display(){
     glVertex2i(300, 300);
     glVertex2i(100, 300);
     glEnd();
+
+    glPopMatrix(); // translate, rotate, scale end
+
 
     //-------------Draw Polygon (draw any shape filled)-------------------
     glBegin(GL_POLYGON);
@@ -127,6 +136,10 @@ void init(){
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0, x, 0, y); // (left, right, bottom, top)
+
+    // Use ModelView for transformations
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 }
 
 int main(int argc, char** argv){

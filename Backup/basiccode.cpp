@@ -43,6 +43,7 @@ void display(){
     glClear(GL_COLOR_BUFFER_BIT);
 
     glColor3f(1.0f, 0.0f, 0.0f);
+    glLineWidth(5.0f);
 
     // -------------Draw Point-------------------
     glBegin(GL_POINTS);
