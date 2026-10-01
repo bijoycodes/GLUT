@@ -5,6 +5,9 @@
 int x = 800;
 int y = 600;
 
+int posX = 100;
+int posY = 100;
+
 // Function to draw a circle using line loop
 // cx, cy: center coordinates of the circle
 // r: radius of the circle
@@ -86,7 +89,34 @@ void display(){
     // ------------Draw Filled Circle-------------------
     drawFilledCircle(600, 300, 50);
 
+    // Draw square
+    glBegin(GL_POLYGON);
+
+    glVertex2i(posX, posY);
+    glVertex2i(posX + 100, posY);
+    glVertex2i(posX + 100, posY + 100);
+    glVertex2i(posX, posY + 100);
+
+    glEnd();
+
     glFlush();
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    if (key == 'w')
+        posY += 10;
+
+    if (key == 's')
+        posY -= 10;
+
+    if (key == 'a')
+        posX -= 10;
+
+    if (key == 'd')
+        posX += 10;
+
+    glutPostRedisplay();
 }
 
 void init(){
@@ -109,6 +139,8 @@ int main(int argc, char** argv){
     init();
 
     glutDisplayFunc(display);
+
+    glutKeyboardFunc(keyboard);
 
     glutMainLoop();
     return 0;
