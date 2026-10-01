@@ -8,6 +8,8 @@ int y = 600;
 int posX = 100;
 int posY = 100;
 
+int posCTX = 100;
+
 // Function to draw a circle using line loop
 // cx, cy: center coordinates of the circle
 // r: radius of the circle
@@ -93,7 +95,7 @@ void display(){
     glEnd();
 
     // ------------Draw Circle-------------------
-    drawCircle(400, 300, 100);
+    drawCircle(posCTX, 300, 100);
 
     // ------------Draw Filled Circle-------------------
     drawFilledCircle(600, 300, 50);
@@ -111,8 +113,20 @@ void display(){
     glFlush();
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
+void animate(){
+    // Move the square
+    posCTX += 1;
+
+    // If it reaches the right side,
+    // start again from the left
+    if (posCTX > x)
+        posCTX = 0;
+
+    // Tell GLUT to redraw
+    glutPostRedisplay();
+}
+
+void keyboard(unsigned char key, int x, int y){
     if (key == 'w')
         posY += 10;
 
@@ -154,6 +168,9 @@ int main(int argc, char** argv){
     glutDisplayFunc(display);
 
     glutKeyboardFunc(keyboard);
+
+    // Continuously call animate()
+    glutIdleFunc(animate);
 
     glutMainLoop();
     return 0;
